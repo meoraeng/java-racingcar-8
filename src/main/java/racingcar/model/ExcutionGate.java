@@ -1,4 +1,5 @@
 package racingcar.model;
 
-public class ExcutionGate {
+public interface ExcutionGate {
+    boolean allow();
 }
