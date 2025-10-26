@@ -1,6 +1,7 @@
 package racingcar.model.factory;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,7 +27,7 @@ public class CarsFactoryTest {
         Validator<String[]> validator = new UniqueNamesValidator();
         CarsFactory factory = new CarsFactory(validator);
 
-        assertThat(() -> factory.createFrom(new String[]{"pobi", "pobi"}))
+        assertThatThrownBy(() -> factory.createFrom(new String[]{"pobi", "pobi"}))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("중복");
     }
