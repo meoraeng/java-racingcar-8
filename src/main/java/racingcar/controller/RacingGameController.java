@@ -22,11 +22,11 @@ public class RacingGameController {
         this.winnersPrinter = winnersPrinter;
     }
 
-    public void play(String[] names, int attempts) {
+    public void play(String[] names, int repetitions) {
         Cars cars = factory.createFrom(names);
 
         System.out.println("실행 결과");
-        for (int i = 0; i < attempts; i++) {
+        for (int i = 0; i < repetitions; i++) {
             cars.moveForwardAllowedCars(gate);
             cars.printAllTo(playPrinter);
             System.out.println();
