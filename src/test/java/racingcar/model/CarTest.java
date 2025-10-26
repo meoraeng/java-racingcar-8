@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import racingcar.model.port.PlayResultPrinter;
+import racingcar.model.Car;
+
 
 public class CarTest extends NsTest {
     static class TestPlayResultPrinter implements PlayResultPrinter {
@@ -15,7 +18,7 @@ public class CarTest extends NsTest {
         @Override
         public void print(String name, int point) {
             String dash = "-".repeat(point);
-            printedResults.add(name + ":" + dash);
+            printedResults.add(name + " : " + dash);
         }
     }
 
