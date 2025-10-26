@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 
 public class CarNameAndRepsParserTest extends NsTest {
-    private final CarNameParser parser = new CarNameParser();
+    private final CarNameAndRepsParser parser = new CarNameAndRepsParser();
 
     @Test
     @DisplayName("콤마만 사용한 경우 이름 입력값이 문자열 배열로 반환되는지 테스트")
@@ -20,7 +20,7 @@ public class CarNameAndRepsParserTest extends NsTest {
         final String userFirstInput = "pobi,woni";
         final String[] expectedReturn = {"pobi", "woni"};
 
-        String[] actual = parser.parseName(userFirstInput);
+        String[] actual = parser.parseNames(userFirstInput);
 
         assertThat(actual).isEqualTo(expectedReturn);
     }
@@ -31,7 +31,7 @@ public class CarNameAndRepsParserTest extends NsTest {
         final String userFirstInput = " pobi, woni";
         final String[] expectedReturn = {"pobi", "woni"};
 
-        String[] actual = parser.parseName(userFirstInput);
+        String[] actual = parser.parseNames(userFirstInput);
 
         assertThat(actual).isEqualTo(expectedReturn);
     }
@@ -50,23 +50,21 @@ public class CarNameAndRepsParserTest extends NsTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {
-            "abcedf",
-            "",
-            "   "
-    })
-    @DisplayName("분할된 이름 토큰이 1~5글자가 아닌 값이 있는 경우 IllegalArgumentException 발생")
-    public void parseNamesLengthValidation(String token) {
-        assertThatThrownBy(() -> {
-            parser.parseNames(token);
-        })
+    @ValueSource(strings = {"abcdef"})
+    @DisplayName("이름이 6글자 이상인 경우 IllegalArgumentException 발생")
+    void tooLongNameThrows(String token) {
+        assertThatThrownBy(() -> parser.parseNames(token))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("이름은 1~5자여야 합니다.");
-        assertThatThrownBy(() -> {
-            parser.parseNames("pobi," + token);
-        })
+                .hasMessageContaining("이름은 1~5자여야 합니다");
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"", "   "})
+    @DisplayName("입력이 비어있는 경우 IllegalArgumentException 발생")
+    void emptyInputThrows(String input) {
+        assertThatThrownBy(() -> parser.parseNames(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("이름은 1~5자여야 합니다.");
+                .hasMessageContaining("입력이 비어있습니다.");
     }
 
     @Test
@@ -111,7 +109,7 @@ public class CarNameAndRepsParserTest extends NsTest {
             parser.parseRepetitions(userSecondInput);
         })
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("반복 회수는 1이상의 정수만 허용됩니다.");
+                .hasMessageContaining("반복 회수는 1이상의 정수만 허용됩니다");
     }
 
     @Override
