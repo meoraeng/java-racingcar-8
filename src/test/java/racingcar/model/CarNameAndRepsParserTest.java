@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 
-public class CarNameAndRepsParserTest extends NsTest {
+public class CarNameAndRepsParserTest {
     private final CarNameAndRepsParser parser = new CarNameAndRepsParser();
 
     @Test
@@ -110,9 +110,5 @@ public class CarNameAndRepsParserTest extends NsTest {
         })
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("반복 회수는 1이상의 정수만 허용됩니다");
-    }
-
-    @Override
-    protected void runMain() {
     }
 }

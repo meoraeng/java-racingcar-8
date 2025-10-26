@@ -2,16 +2,14 @@ package racingcar.model;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import racingcar.model.port.PlayResultPrinter;
-import racingcar.model.Car;
 
 
-public class CarTest extends NsTest {
+public class CarTest {
     static class TestPlayResultPrinter implements PlayResultPrinter {
         final List<String> printedResults = new ArrayList<>();
 
@@ -45,10 +43,5 @@ public class CarTest extends NsTest {
         car.printTo(printer);
 
         assertThat(printer.printedResults).containsExactly("pobi : ---");
-    }
-
-
-    @Override
-    protected void runMain() {
     }
 }
