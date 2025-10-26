@@ -37,7 +37,7 @@ public class CarsTest {
     void moveForwardWhenAllowedTest() {
         Cars cars = new Cars(List.of(new Car("pobi"), new Car("woni")));
 
-        cars.moveForawardAllowedCars(new AlwaysAllowGate());
+        cars.moveForwardAllowedCars(new AlwaysAllowGate());
         TestPlayResultPrinter printer = new TestPlayResultPrinter();
         cars.printAllTo(printer);
 
@@ -49,7 +49,7 @@ public class CarsTest {
     void moveForwardWhenBlockedTest() {
         Cars cars = new Cars(List.of(new Car("pobi"), new Car("woni")));
 
-        cars.moveForawardAllowedCars(new AlwaysBlockGate());
+        cars.moveForwardAllowedCars(new AlwaysBlockGate());
         TestPlayResultPrinter printer = new TestPlayResultPrinter();
         cars.printAllTo(printer);
 

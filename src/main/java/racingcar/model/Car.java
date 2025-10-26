@@ -17,4 +17,12 @@ public class Car {
     public void printTo(PlayResultPrinter printer) {
         printer.print(name, point);
     }
+
+    int point() {
+        return point;
+    }
+
+    boolean hasPoint(int target) {
+        return point == target;
+    }
 }
