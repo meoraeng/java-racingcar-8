@@ -22,6 +22,10 @@ public class Car {
         return point;
     }
 
+    String name() {
+        return name;
+    }
+
     boolean hasPoint(int target) {
         return point == target;
     }

@@ -44,4 +44,10 @@ public class Cars {
                 .filter(c -> c.hasPoint(maxPoint))
                 .toList();
     }
+
+    public List<String> findWinnersNames() {
+        return findWinners().stream()
+                .map(Car::name)
+                .toList();
+    }
 }

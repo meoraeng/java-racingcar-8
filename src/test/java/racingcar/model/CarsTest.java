@@ -61,14 +61,14 @@ public class CarsTest {
     void findWinnersTest() {
         Car pobi = new Car("pobi");
         Car woni = new Car("woni");
-        Car lavine = new Car("lavine");
+        Car lavin = new Car("lavin");
 
         pobi.moveForward();
         pobi.moveForward();
         woni.moveForward();
         woni.moveForward();
 
-        Cars cars = new Cars(List.of(pobi, woni, lavine));
+        Cars cars = new Cars(List.of(pobi, woni, lavin));
 
         List<Car> winners = cars.findWinners();
         assertThat(winners).extracting("name").containsExactlyInAnyOrder("pobi", "woni");

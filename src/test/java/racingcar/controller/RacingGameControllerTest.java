@@ -11,6 +11,7 @@ import racingcar.model.factory.CarsFactory;
 import racingcar.model.port.PlayResultPrinter;
 import racingcar.model.validator.UniqueNamesValidator;
 import racingcar.model.validator.Validator;
+import racingcar.view.WinnersPrinter;
 
 public class RacingGameControllerTest {
     static class TestPlayResultPrinter implements PlayResultPrinter {
@@ -22,12 +23,12 @@ public class RacingGameControllerTest {
         }
     }
 
-    static class TestWinnersPrinter implements WinnersPrinter {
+    static class TestWinnersPrinter extends WinnersPrinter {
         String last;
 
         @Override
-        public void printWinners(String winners) {
-            last = winners;
+        public void printWinners(List<String> winners) {
+            last = String.join(", ", winners);
         }
     }
 
@@ -56,7 +57,7 @@ public class RacingGameControllerTest {
         TestPlayResultPrinter playPrinter = new TestPlayResultPrinter();
         TestWinnersPrinter winnersPrinter = new TestWinnersPrinter();
 
-        ExcutionGate gate = new TempGate();
+        ExcutionGate gate = new TempGate(true, false);
 
         RacingGameController controller = new RacingGameController(factory, gate, playPrinter, winnersPrinter);
         controller.play(new String[]{"pobi", "woni"}, 1);
@@ -82,8 +83,8 @@ public class RacingGameControllerTest {
         controller.play(new String[]{"pobi", "woni", "lavine"}, 2);
 
         assertThat(playPrinter.lines).containsExactly(
-                "pobi: -", "woni : -", "lavine : ",
-                "pobi: --", "woni : --", "lavine : "
+                "pobi : -", "woni : -", "lavine : ",
+                "pobi : --", "woni : --", "lavine : "
         );
 
         assertThat(winnersPrinter.last).isEqualTo("pobi, woni");
