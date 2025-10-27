@@ -35,14 +35,18 @@ public class Cars {
             return List.of();
         }
 
-        int maxPoint = cars.stream()
-                .mapToInt(Car::point)
-                .max()
-                .orElse(0);
+        int maxPoint = findMaxPoint();
 
         return cars.stream()
                 .filter(c -> c.hasPoint(maxPoint))
                 .toList();
+    }
+
+    private int findMaxPoint() {
+        return cars.stream()
+                .mapToInt(Car::point)
+                .max()
+                .orElse(0);
     }
 
     public List<String> findWinnersNames() {
