@@ -70,3 +70,4 @@
 
 ## 클래스 다이어그램
 
+<img width="1381" height="808" alt="2week drawio" src="https://github.com/user-attachments/assets/e0bf2ac6-72fd-49be-bae4-014933da2072" />
