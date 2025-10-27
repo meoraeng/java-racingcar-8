@@ -28,6 +28,20 @@ public class RandomNumberGateTest extends NsTest {
         );
     }
 
+    @Test
+    @DisplayName("여러 번 호출해도 각 난수에 따라 올바르게 판단한다")
+    void allowForMultipleCalls() {
+        assertRandomNumberInRangeTest(
+                () -> {
+                    RandomNumberGate gate = new RandomNumberGate();
+                    assertThat(gate.allow()).isTrue();
+                    assertThat(gate.allow()).isFalse();
+                    assertThat(gate.allow()).isTrue();
+                },
+                5, 3, 9
+        );
+    }
+
     @Override
     protected void runMain() {
     }
